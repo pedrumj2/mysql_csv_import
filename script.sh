@@ -4,7 +4,8 @@ if [ $1 == "-h" ]; then
   printf "Usage <Password> <database> <csv file>\n"
   printf "note escape special characters in password\n"
 else
- A=$(printf "mysql -u root -p'%s' %s -e \"CREATE TABLE IF NOT EXISTS CSV(" $1 $2)
+  NAME=$(basename $3);
+ A=$(printf "mysql -u root -p'%s' %s -e \"CREATE TABLE IF NOT EXISTS %s(" $1 $2 $4)
   B=$(head -1 $3 | sed -e 's/,/" "VARCHAR(20),/g'  | xargs printf "%s" $3)
   
   C=$(printf  " VARCHAR(20));\"\n")
